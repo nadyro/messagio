@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Luane's First Task</title>
+    </head>
+    <body>
+        <div id="text_test" class="text_test">
+            <p>Ceci est un test <span id="text_test_span">un deux trois</span></p>
+            <div id="clickable"><p>Show more</p></div>
+        </div>
+    </body>
+    <script>
+        var test = document.getElementById("text_test_span");
+        test.style.display = "none";        
+        var clickable = document.getElementById("clickable");
+        clickable.onclick = function(){
+            test.style.display = "inline";
+        };
+
+
+        
+
+
+
+
+
+        
+    console.log("test");
+    </script>
+</html>

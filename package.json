@@ -1,0 +1,22 @@
+{
+  "name": "messagioapp",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "@types/socket.io-client": "^1.4.32",
+    "bluebird": "^3.5.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "~2.5.7",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "mongoose": "^5.3.1",
+    "mongoose-paginate": "^5.0.3",
+    "morgan": "~1.9.0",
+    "socket.io": "^2.1.1",
+    "socket.io-client": "^2.1.1"
+  }
+}
