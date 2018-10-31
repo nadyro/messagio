@@ -1,55 +1,56 @@
-import { Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { MessagioService } from './services/messagio.service';
 import Messagio from './models/messagio.model';
-import { MessagioChatService } from './services/messagiochat.service';
-import { Component, OnInit } from '@angular/core';
+//import { MessagioChatService } from './services/messagiochat.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable } from 'rxjs';
+import { MessagioSocketService } from './services/messagiosocket.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-
+export class AppComponent implements OnInit, OnDestroy {
+  message: Observable<any>;
+  response: HttpClient
+  Connection;
   constructor(
-    //Private todoservice will be injected into the component by Angular Dependency Injector
-    private messagioService: MessagioService, private chatService: MessagioChatService
+    private messagioService: MessagioService, /*private chatService: MessagioChatService,*/ private chatServices: MessagioSocketService
   ) { }
 
-  //Declaring the new todo Object and initilizing it
   public newMessagio: Messagio = new Messagio()
 
-  //An Empty list for the visible todo list
   messagiosList: Messagio[];
 
+  sendMessage() {
+    this.chatServices.sendMessage(this.newMessagio.content);
+  }
 
   ngOnInit(): void {
 
-    //At component initialization the 
     this.messagioService.getMessagios()
       .subscribe(messagios => {
-        //assign the todolist property to the proper http response
         this.messagiosList = messagios
-        //console.log(messagios)
       })
-      this.chatService.messagios.subscribe(msg => {
-        console.log(msg);
-      })
+    this.Connection = this.chatServices.getMessage().subscribe(res => {
+      this.newMessagio.content = res['text'];
+      this.newMessagio.date = new Date();
+      this.messagiosList.push(this.newMessagio);
+      this.newMessagio = new Messagio();
+    });
   }
 
   create() {
-    this.messagioService.createMessagio(this.newMessagio)
-      .subscribe((res) => {
-        this.messagiosList.push(res.data)
-        this.newMessagio = new Messagio()
-      })
-  }
-  sendMessage() {
-    this.chatService.sendMessagios(this.newMessagio.content);
+    this.messagioService.createMessagio(this.newMessagio);
   }
   deleteMessagio(messagio: Messagio) {
     this.messagioService.deleteMessagio(messagio._id).subscribe(res => {
       this.messagiosList.splice(this.messagiosList.indexOf(messagio), 1);
     })
+  }
+
+  ngOnDestroy() {
+    this.Connection.unsubscribe();
   }
 }

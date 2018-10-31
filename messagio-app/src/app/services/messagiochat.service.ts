@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+/*import { Injectable } from "@angular/core";
 import { MessagioSocketService } from "./messagiosocket.service";
 import { Observable, Subject } from "rxjs";
 import { map } from 'rxjs/operators';
@@ -16,6 +16,6 @@ export class MessagioChatService {
 
     sendMessagios(msg) {
         console.log(msg);
-        this.messagios.next(msg);
+        return (this.messagios.next(msg));
     }
-}
+}*/

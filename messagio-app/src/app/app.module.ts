@@ -6,7 +6,7 @@ import { MessagioService } from './services/messagio.service';
 import { AppComponent } from './app.component';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { MessagioChatService } from './services/messagiochat.service';
+//import { MessagioChatService } from './services/messagiochat.service';
 import { MessagioSocketService } from './services/messagiosocket.service';
 
 @NgModule({
@@ -21,7 +21,7 @@ import { MessagioSocketService } from './services/messagiosocket.service';
   ],
   providers: [
     MessagioService,
-    MessagioChatService,
+    //MessagioChatService,
     MessagioSocketService
   ],
   bootstrap: [AppComponent]

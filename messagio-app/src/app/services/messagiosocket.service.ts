@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import * as io from 'socket.io-client';
+//import * as Rx from 'rxjs';
 import { Observable } from 'rxjs';
-import * as Rx from 'rxjs';
+import * as io from 'socket.io-client';
 import { environment } from '../../environments/environment';
 
 @Injectable()
@@ -12,7 +12,23 @@ export class MessagioSocketService {
 
     constructor() { }
 
-    connect(): Rx.Subject<MessageEvent> {
+    sendMessage(message) {
+        this.socket.emit("add-messagio", message);
+    }
+    getMessage() {
+        let observable = new Observable(observer => {
+            this.socket = io(environment.ws_url);
+            this.socket.on('messagio', (data) => {
+                console.log("Received message from Websocket Server")
+                observer.next(data);
+            })
+            return () => {
+                this.socket.disconnect();
+            }
+        });
+        return (observable);
+    }
+   /* connect(): Rx.Subject<MessageEvent> {
         // If you aren't familiar with environment variables then
         // you can hard code `environment.ws_url` as `http://localhost:5000`
         this.socket = io(environment.ws_url);
@@ -24,6 +40,9 @@ export class MessagioSocketService {
                 console.log("Received message from Websocket Server")
                 observer.next(data);
             })
+            return () => {
+                this.socket.disconnect();
+            }
         });
 
         // We define our Observer which will listen to messages
@@ -31,13 +50,13 @@ export class MessagioSocketService {
         // socket server whenever the `next()` method is called.
         let observer = {
             next: (data: Object) => {
-                this.socket.emit('messagio', JSON.stringify(data));
+                this.socket.emit('messagio', data);
             },
         };
 
         // we return our Rx.Subject which is a combination
         // of both an observer and observable.
         return Rx.Subject.create(observer, observable);
-    }
+    }*/
 
 }
