@@ -30,7 +30,6 @@ exports.getMessagio = async function (request, response, next) {
 }
 
 exports.createMessagio = async function (request, response, next) {
-    console.log(request.body);
     var messagio = {
         title: request.body.title,
         content: request.body.content,
@@ -41,6 +40,7 @@ exports.createMessagio = async function (request, response, next) {
     }
 
     try {
+        console.log("Messagio testing");
         var createdMessagio = await MessagioService.createMessagio(messagio);
         return response.status(201).json({
             status: 201,

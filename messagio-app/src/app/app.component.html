@@ -17,6 +17,6 @@
   <input name="messagio_content" id="messagio_content" [(ngModel)]="newMessagio.content" placeholder="Write a message" class="form-control">
   </div>
   <div class="col-md-2">
-    <button type="submit" class="btn btn-primary" (click)="sendMessage()">Send</button>
+    <button type="submit" class="btn btn-primary" (click)="create()" (click)="sendMessage()">Send</button>
   </div>
 </div>

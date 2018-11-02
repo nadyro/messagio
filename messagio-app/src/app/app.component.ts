@@ -13,8 +13,8 @@ import { MessagioSocketService } from './services/messagiosocket.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
   message: Observable<any>;
-  response: HttpClient
   Connection;
+  result = null;
   constructor(
     private messagioService: MessagioService, /*private chatService: MessagioChatService,*/ private chatServices: MessagioSocketService
   ) { }
@@ -28,22 +28,22 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this.messagioService.getMessagios()
       .subscribe(messagios => {
         this.messagiosList = messagios
       })
     this.Connection = this.chatServices.getMessage().subscribe(res => {
-      this.newMessagio.content = res['text'];
-      this.newMessagio.date = new Date();
       this.messagiosList.push(this.newMessagio);
       this.newMessagio = new Messagio();
     });
   }
 
   create() {
-    this.messagioService.createMessagio(this.newMessagio);
+    this.messagioService.createMessagio(this.newMessagio).subscribe((res) => {
+      console.log(res);
+    });
   }
+
   deleteMessagio(messagio: Messagio) {
     this.messagioService.deleteMessagio(messagio._id).subscribe(res => {
       this.messagiosList.splice(this.messagiosList.indexOf(messagio), 1);

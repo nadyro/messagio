@@ -15,13 +15,13 @@ export class MessagioService {
 
 
   createMessagio(messagio: Messagio): Observable<any>{
+    console.log("Service");
     return this.http.post(`${this.messagioUrl}`, messagio);
   }
 
   getMessagios(): Observable<Messagio[]>{
     return this.http.get(this.messagioUrl)
     .pipe(map(res  => {
-        
       return res["data"].docs as Messagio[];
     }))
   }
