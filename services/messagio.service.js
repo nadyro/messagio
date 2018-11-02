@@ -19,11 +19,11 @@ exports.getMessagio = async function (query, page, limit) {
 }
 
 exports.createMessagio = async function (messagio) {
+    save_date = new Date();
     var newMessagio = new Messagio({
         title: messagio.title,
         content: messagio.content,
-        position: messagio.position,
-        date: new Date(),
+        date: save_date,
         status: messagio.status,
         emitter: messagio.emitter,
         receiver: messagio.receiver
@@ -34,7 +34,7 @@ exports.createMessagio = async function (messagio) {
         return savedMessagio;
     }
     catch (e){
-        throw Error('Error while Creating Messagio');
+        throw Error(e);
     }
 }
 
@@ -54,7 +54,7 @@ exports.updateMessagio = async function(messagio){
         console.log(oldMessagio);
         oldMessagio.title = messagio.title;
         oldMessagio.content = messagio.content;
-        oldMessagio.date = messagio.date;
+        oldMessagio.date = format_date(new Date());
         oldMessagio.status = messagio.status;
         oldMessagio.emitter = messagio.emitter;
         oldMessagio.receiver = messagio.receiver;

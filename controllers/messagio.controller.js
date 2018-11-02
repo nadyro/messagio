@@ -33,14 +33,12 @@ exports.createMessagio = async function (request, response, next) {
     var messagio = {
         title: request.body.title,
         content: request.body.content,
-        position: request.body.position,
         status: request.body.status,
         emitter: request.body.emitter,
         receiver: request.body.receiver
     }
 
     try {
-        console.log("Messagio testing");
         var createdMessagio = await MessagioService.createMessagio(messagio);
         return response.status(201).json({
             status: 201,
@@ -57,7 +55,6 @@ exports.updateMessagio = async function (request, response, next) {
 
     var title = null;
     var content = null;
-    var position = 0;
     var status = null;
     var emitter = null;
     var receiver = null;
@@ -70,8 +67,6 @@ exports.updateMessagio = async function (request, response, next) {
         title = request.body.title;
     if (request.body.content)
         content = request.body.content;
-    if (request.body.position)
-        position = request.body.position;
     if (request.body.status)
         status = request.body.status;
     if (request.body.emitter)
@@ -82,7 +77,6 @@ exports.updateMessagio = async function (request, response, next) {
         id,
         title: title,
         content: content,
-        position: position,
         status: status,
         emitter: emitter,
         receiver: receiver

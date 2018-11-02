@@ -61,7 +61,7 @@ io.on('connection', (socket) => {
   });
   socket.on('add-messagio', (message) => {
     console.log("Message received : " + message);
-    io.emit('messagio', {type: 'new-message', text: message});
+    io.emit('messagio', {type: 'new-message', object: message});
   });
 });
 http.listen(3000, function(request, response){

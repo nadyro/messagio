@@ -1,22 +1,33 @@
-<div class="row">
-  <div class="col-md-8" *ngFor="let messagio of messagiosList">
-    <p>
-      {{messagio.date}}
-    </p>
-    <p>
-      {{messagio.content}}
-    </p>
-    <p>
-      {{messagio.emitter}}
-    </p>
-    <p>
-      {{messagio.receiver}}
-    </p>
-  </div>
-  <div class="col-md-2">  
-  <input name="messagio_content" id="messagio_content" [(ngModel)]="newMessagio.content" placeholder="Write a message" class="form-control">
-  </div>
-  <div class="col-md-2">
-    <button type="submit" class="btn btn-primary" (click)="create()" (click)="sendMessage()">Send</button>
+<div class="container poz">
+  <div class="row">
+    <div class="col-3 borders"></div>
+    <div class="col-7 borders border-center row">
+      <div class="messages col-12 container" *ngFor="let messagio of messagiosList">
+        <div class="messages_content">
+          <p class="message_element m_date">
+            {{messagio.date}}
+          </p>
+          <p class="message_element m_content">
+            {{messagio.content}}
+          </p>
+          <p class="message_element m_emitter">
+            {{messagio.emitter}}
+          </p>
+          <p class="message_element m_receiver">
+            {{messagio.receiver}}
+          </p>
+        </div>
+      </div>
+      <div class="bottom_chat">
+        <div class="chat_write">
+          <input name="messagio_content" id="messagio_content" [(ngModel)]="newMessagio.content" placeholder="Write a message"
+            class="form-control">
+        </div>
+        <div class="chat_send">
+          <button type="submit" class="btn btn-primary" (click)="create()" (click)="sendMessage()">Send</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-2 borders"></div>
   </div>
 </div>

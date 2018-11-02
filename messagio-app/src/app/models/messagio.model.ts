@@ -2,7 +2,7 @@ class Messagio {
     _id: string;
     title: string;
     content: string;
-    date: Date;
+    date: string;
     status: string;
     emitter: string;
     receiver: string;
@@ -11,7 +11,7 @@ class Messagio {
     ){
         this.title = ""
         this.content = ""
-        this.date = new Date()
+        this.date = "";
         this.status = ""
         this.emitter = "";
         this.receiver = "";

@@ -24,7 +24,9 @@ export class AppComponent implements OnInit, OnDestroy {
   messagiosList: Messagio[];
 
   sendMessage() {
-    this.chatServices.sendMessage(this.newMessagio.content);
+    console.log("Send Message");
+    this.newMessagio.date = this.messagioService.parsingDate();
+    this.chatServices.sendMessage(this.newMessagio);
   }
 
   ngOnInit(): void {
@@ -33,14 +35,17 @@ export class AppComponent implements OnInit, OnDestroy {
         this.messagiosList = messagios
       })
     this.Connection = this.chatServices.getMessage().subscribe(res => {
-      this.messagiosList.push(this.newMessagio);
+      console.log("Connection")
+      console.log(res);
+      this.messagiosList.push(res['object']);
       this.newMessagio = new Messagio();
     });
   }
 
   create() {
     this.messagioService.createMessagio(this.newMessagio).subscribe((res) => {
-      console.log(res);
+      console.log("Create");
+      console.log(res);      
     });
   }
 
