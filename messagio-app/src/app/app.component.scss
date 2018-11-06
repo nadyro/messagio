@@ -2,29 +2,46 @@
 /*@import '../node_modules/font-awesome/css/font-awesome.css';*/
 .poz{
     border-radius: 5px;
-    padding: 10px;
+    /*padding: 10px;*/
     box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
     border: none;
-    position: absolute;
-    transform: translateX(-50%) translateY(-50%);
+    //position: absolute;
+    //transform: translateX(-50%) translateY(-50%);
     left: 50%;
     top: 50%;
     background: white;
     color: white;
 }
+.void_content, .messages{
+    display: inline-block;
+}
 .messages{
     font-family: 'Spectral', serif;
-    display: block;
     padding: 10px;
     border-radius: 5px;
-    background: rgba(135,206,235, 1);
+    background: #0069d9;
     border: solid;
     border-color: white;
     border-width: 1px;
-    margin: 10px;
 }
-.borders{
-    border: none;
+.container_profile{
+    color: black;
+    box-shadow: 1px 1px 3px rgba(0,0,0, 0.5);
+    border-radius: 5px;
+}
+.pp_profile{
+    padding: 5px;
+}
+.pp_profile_img{
+    width: 100%;
+    border-radius: 50%;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+.infos_profile{
+    text-align: justify;
+}
+.btn-chat_send{
+    width: 100%;
 }
 .bottom_chat{
     display: block;

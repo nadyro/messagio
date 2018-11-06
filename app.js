@@ -1,3 +1,4 @@
+const cors = require('cors');
 var createError = require('http-errors');
 var express = require('express');
 var app = express();
@@ -12,17 +13,18 @@ var usersRouter = require('./routes/users');
 var api = require("./routes/api.route");
 var bluebird = require("bluebird");
 var mongoose = require("mongoose");
+var counter = 0;
 
 mongoose.Promise = bluebird;
 mongoose.connect("mongodb://localhost/messagio", { useNewUrlParser: true }).then(() => { console.log('Successfully connected to Database Messagio.') }).catch(() => { console.log('Unable to connect to database Messagio.') });
-
-app.use(function (request, response, next) {
+app.use(cors());
+/*app.use(function (request, response, next) {
   response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
   response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   response.setHeader('Access-Control-Allow-Credentials', true);
   next();
-});
+});*/
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -53,15 +55,20 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
+var connections = [];
+var i;
 io.on('connection', (socket) => {
   console.log("User connected");
+  connections.push(socket);
   socket.on('disconnect', function(){
     console.log("user disconnected");
+    i = connections.indexOf(socket);
+    connections.splice(i, 1);
   });
   socket.on('add-messagio', (message) => {
+    counter++;
     console.log("Message received : " + message);
-    io.emit('messagio', {type: 'new-message', object: message});
+    io.emit('messagio', {type: 'new-message', object: message, counter: counter});
   });
 });
 http.listen(3000, function(request, response){

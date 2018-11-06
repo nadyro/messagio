@@ -36,6 +36,7 @@ export class MessagioService {
 
   createMessagio(messagio: Messagio): Observable<any> {
     console.log("Service");
+    console.log(this.http.post(`${this.messagioUrl}`, messagio));
     return this.http.post(`${this.messagioUrl}`, messagio);
   }
 

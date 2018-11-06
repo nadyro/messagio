@@ -3,6 +3,7 @@ class Messagio {
     title: string;
     content: string;
     date: string;
+    position: number;
     status: string;
     emitter: string;
     receiver: string;
@@ -12,6 +13,7 @@ class Messagio {
         this.title = ""
         this.content = ""
         this.date = "";
+        this.position = 0;
         this.status = ""
         this.emitter = "";
         this.receiver = "";
