@@ -9,7 +9,7 @@
     transform: translateX(-50%) translateY(-50%);
     left: 50%;
     top: 50%;
-    background: rgba(255,165,0,0.7);
+    background: white;
     color: white;
 }
 .messages{
@@ -32,7 +32,6 @@
 .bottom_chat .chat_write, .bottom_chat .chat_send{
     display: inline-block;
 }
-
 .messages .messages_content{
     margin: 0;
 }
