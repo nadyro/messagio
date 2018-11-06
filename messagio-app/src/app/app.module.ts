@@ -8,10 +8,15 @@ import { AppComponent } from './app.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 //import { MessagioChatService } from './services/messagiochat.service';
 import { MessagioSocketService } from './services/messagiosocket.service';
+import { UsersService} from './services/users.service';
+import { SigninComponent} from './auth/signin/signin.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SignupComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +27,9 @@ import { MessagioSocketService } from './services/messagiosocket.service';
   providers: [
     MessagioService,
     //MessagioChatService,
-    MessagioSocketService
+    MessagioSocketService,
+    UsersService
+    
   ],
   bootstrap: [AppComponent]
 })

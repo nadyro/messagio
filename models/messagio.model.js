@@ -4,6 +4,7 @@ var MessagioSchema = new mongoose.Schema({
     title: String,
     content: String,
     date: Date,
+    position: Number,
     status: String,
     emitter: String,
     receiver: String

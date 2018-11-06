@@ -12,16 +12,15 @@ import { MessagioSocketService } from './services/messagiosocket.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  message: Observable<any>;
   Connection;
-  result = null;
   constructor(
     private messagioService: MessagioService, /*private chatService: MessagioChatService,*/ private chatServices: MessagioSocketService
   ) { }
 
-  public newMessagio: Messagio = new Messagio()
+  public newMessagio: Messagio = new Messagio();
 
   messagiosList: Messagio[];
+  counter: number = 0;
 
   sendMessage() {
     console.log("Send Message");
@@ -32,17 +31,21 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.messagioService.getMessagios()
       .subscribe(messagios => {
-        this.messagiosList = messagios
+        console.log(messagios);
+        this.messagiosList = messagios;
+        this.counter = this.messagiosList.length;
       })
+    
     this.Connection = this.chatServices.getMessage().subscribe(res => {
       console.log("Connection")
-      console.log(res);
       this.messagiosList.push(res['object']);
       this.newMessagio = new Messagio();
     });
   }
 
   create() {
+    this.counter++;
+    this.newMessagio.position = this.counter;
     this.messagioService.createMessagio(this.newMessagio).subscribe((res) => {
       console.log("Create");
       console.log(res);      

@@ -24,12 +24,14 @@ exports.createMessagio = async function (messagio) {
         title: messagio.title,
         content: messagio.content,
         date: save_date,
+        position: messagio.position,
         status: messagio.status,
         emitter: messagio.emitter,
         receiver: messagio.receiver
     })
 
     try {
+        console.log("Saving messagio");
         var savedMessagio = await newMessagio.save();
         return savedMessagio;
     }
@@ -55,6 +57,7 @@ exports.updateMessagio = async function(messagio){
         oldMessagio.title = messagio.title;
         oldMessagio.content = messagio.content;
         oldMessagio.date = format_date(new Date());
+        oldMessagio.position = messagio.position;
         oldMessagio.status = messagio.status;
         oldMessagio.emitter = messagio.emitter;
         oldMessagio.receiver = messagio.receiver;
