@@ -20,10 +20,12 @@ exports.getMessagio = async function (query, page, limit) {
 
 exports.createMessagio = async function (messagio) {
     save_date = new Date();
+    date_to_long = save_date.getTime();
     var newMessagio = new Messagio({
         title: messagio.title,
         content: messagio.content,
         date: save_date,
+        full_date: date_to_long,
         position: messagio.position,
         status: messagio.status,
         emitter: messagio.emitter,
@@ -36,6 +38,7 @@ exports.createMessagio = async function (messagio) {
         return savedMessagio;
     }
     catch (e){
+        console.log("Errors!!!");
         throw Error(e);
     }
 }

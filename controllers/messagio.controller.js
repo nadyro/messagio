@@ -18,6 +18,9 @@ exports.getMessagio = async function (request, response, next) {
 
     try {
         var messagios = await MessagioService.getMessagio({}, page, limit);
+        messagios.docs.sort(function(sup, inf){
+            return (sup.full_date - inf.full_date);
+        });
         return response.status(200).json({
             status: 200,
             data: messagios,

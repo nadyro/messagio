@@ -1,0 +1,89 @@
+<div class="container poz">
+    <div class="row">
+      <div class="col-3 container container_profile">
+        <div class="profile col-12">
+          <div class="pp_profile">
+            <img class="pp_profile_img" src="assets/img/pp_1.jpg">
+          </div>
+          <div class="infos_profile">
+            <h3>
+              Nadir Sehnoun
+            </h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Maecenas ut mollis mauris, a bibendum risus. Sed at finibus erat.
+              Praesent elementum velit eu imperdiet consequat.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-7">
+        <div class="" *ngFor="let messagio of messagiosList">
+          <ng-template [ngIf]="messagio.position % 2 === 0">
+            <div class="messages messages-left pos_{{counter}} col-6 container">
+              <div class="messages_content">
+                <p class="message_element m_date">
+                  {{messagio.date}}
+                </p>
+                <p class="message_element m_content">
+                  {{messagio.content}}
+                </p>
+                <p class="message_element m_emitter">
+                  {{messagio.emitter}}
+                </p>
+                <p class="message_element m_receiver">
+                  {{messagio.receiver}}
+                </p>
+              </div>
+            </div>
+            <div class="col-6 void_content"></div>
+          </ng-template>
+          <ng-template [ngIf]="messagio.position % 2 === 1">
+            <div class="col-6 void_content"></div>
+            <div class="messages messages-right pos_{{counter}} col-6 container">
+              <div class="messages_content">
+                <p class="message_element m_date">
+                  {{messagio.date}}
+                </p>
+                <p class="message_element m_content">
+                  {{messagio.content}}
+                </p>
+                <p class="message_element m_emitter">
+                  {{messagio.emitter}}
+                </p>
+                <p class="message_element m_receiver">
+                  {{messagio.receiver}}
+                </p>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+        <div class="bottom_chat col-12">
+          <div class="chat_write col-8">
+            <input name="messagio_content" id="messagio_content" [(ngModel)]="newMessagio.content" placeholder="Write a message"
+              class="form-control">
+          </div>
+          <div class="chat_send col-4">
+            <button type="submit" class="btn btn-primary btn-chat_send" (click)="create()" (click)="sendMessage()">Send</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 container container_profile">
+        <div class="profile col-12">
+          <div class="pp_profile">
+            <img class="pp_profile_img" src="assets/img/pp_blackcoffee.jpg">
+          </div>
+          <div class="infos_profile">
+            <h3>
+              Black Coffee
+            </h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Maecenas ut mollis mauris, a bibendum risus. Sed at finibus erat.
+              Praesent elementum velit eu imperdiet consequat.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,7 +1,6 @@
 import Messagio from '../models/messagio.model';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 @Injectable()
@@ -18,7 +17,7 @@ export class MessagioService {
       var date = new Date();
     else
       var date = new Date(str);
-    
+
     var minutes;
     if (date.getMinutes() < 10)
       minutes = "0" + date.getMinutes();
@@ -36,7 +35,6 @@ export class MessagioService {
 
   createMessagio(messagio: Messagio): Observable<any> {
     console.log("Service");
-    console.log(this.http.post(`${this.messagioUrl}`, messagio));
     return this.http.post(`${this.messagioUrl}`, messagio);
   }
 
