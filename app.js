@@ -17,14 +17,16 @@ var counter = 0;
 
 mongoose.Promise = bluebird;
 mongoose.connect("mongodb://localhost/messagio", { useNewUrlParser: true }).then(() => { console.log('Successfully connected to Database Messagio.') }).catch(() => { console.log('Unable to connect to database Messagio.') });
-app.use(cors());
-/*app.use(function (request, response, next) {
-  response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+/*
+app.use(function (request, response, next) {
+  response.setHeader("Access-Control-Allow-Origin", "*");
   response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   response.setHeader('Access-Control-Allow-Credentials', true);
   next();
-});*/
+});
+*/
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -57,6 +59,7 @@ app.use(function (err, req, res, next) {
 });
 var connections = [];
 var i;
+io.set('transports', ['websocket']);
 io.on('connection', (socket) => {
   console.log("User connected");
   connections.push(socket);
