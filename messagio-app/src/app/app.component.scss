@@ -4,6 +4,9 @@ header{
     text-align: center;
     box-shadow: 0.5px 0.5px 0.5px rgba(0,0,0,0.5);
 }
+.title_messagio{
+    text-align: left;
+}
 router-outlet{
     padding: 10px;
 }

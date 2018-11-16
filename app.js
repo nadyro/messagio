@@ -63,7 +63,7 @@ io.set('transports', ['websocket']);
 io.on('connection', (socket) => {
   console.log("User connected");
   connections.push(socket);
-  socket.on('disconnect', function(){
+  socket.on('disconnect', function () {
     console.log("user disconnected");
     i = connections.indexOf(socket);
     connections.splice(i, 1);
@@ -71,11 +71,11 @@ io.on('connection', (socket) => {
   socket.on('add-messagio', (message) => {
     counter++;
     console.log("Message received : " + message);
-    io.emit('messagio', {type: 'new-message', object: message, counter: counter});
+    io.emit('messagio', { type: 'new-message', object: message, counter: counter });
   });
 });
-http.listen(3000, function(request, response){
-console.log("server is running");
+http.listen(3000, function (request, response) {
+  console.log("server is running");
 });
 
 module.exports = app;

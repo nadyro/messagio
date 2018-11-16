@@ -1,31 +1,19 @@
-<div class="fetched_users" *ngFor="let user of userList">
-  <div class="user_content">
-    <p class="user_element u_last_name">
-      {{user.last_name}}
-    </p>
-    <p class="user_element u_first_name">
-      {{user.first_name}}
-    </p>
-    <p class="user_element u_email">
-      {{user.email}}
-    </p>
-    <p class="user_element u_d_o_b">
-      {{user.d_o_b}}
-    </p>
-  </div>
-</div>
-
-<form>
-  <div class="form-group container">
-    <div class="row">
+<form class="container">
+  <div class="form-group row">
+    <div class="col-3"></div>
+    <div class="col-6">
       <input type="text" name="last_name" class="last_name form-control" id="last_name" [(ngModel)]="newUser.last_name"
         placeholder="Last Name">
       <input type="text" name="first_name" class="first_name form-control" id="first_name" [(ngModel)]="newUser.first_name"
         placeholder="First Name">
+      <textarea name="bio" class="bio form-control" id="bio" [(ngModel)]="newUser.bio"
+      placeholder="Who are you ?"></textarea>
       <input type="text" name="email" class="email form-control" id="email" [(ngModel)]="newUser.email" placeholder="Email">
+      <input type="password" name="password_su" class="password_su form-control" id="password_su" [(ngModel)]="newUser.password" placeholder="Password">
       <input type="date" name="d_o_b" class="d_o_b form-control" id="d_o_b" [(ngModel)]="newUser.d_o_b" placeholder="Date of Birth">
 
       <button type="submit" class="btn btn-primary btn-chat_send form-control" (click)="createUser()">Send</button>
     </div>
+    <div class="col-3"></div>
   </div>
 </form>

@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MessagioService } from '../services/messagio.service';
 import { MessagioSocketService } from '../services/messagiosocket.service';
 import Messagio from '../models/messagio.model';
+import Users from '../models/users.model';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-messagio',
@@ -11,7 +13,7 @@ import Messagio from '../models/messagio.model';
 export class MessagioComponent implements OnInit, OnDestroy {
 
   constructor(
-    private messagioService: MessagioService, /*private chatService: MessagioChatService,*/ private chatServices: MessagioSocketService
+    private messagioService: MessagioService, private usersService: UsersService, private chatServices: MessagioSocketService
 
   ) { }
 
@@ -19,6 +21,7 @@ export class MessagioComponent implements OnInit, OnDestroy {
   Connection;
   messagiosList: Messagio[];
   counter: number = 0;
+  usersList: Users[];
 
   sendMessage() {
     console.log("Send Message");
@@ -27,6 +30,9 @@ export class MessagioComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.usersService.getUsers().subscribe(users => {
+      this.usersList = users;
+    })
     this.messagioService.getMessagios()
       .subscribe(messagios => {
         this.messagiosList = messagios;

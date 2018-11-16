@@ -13,6 +13,9 @@ export class UsersService {
     api_url = "http://localhost:3000";
     users_api = `${this.api_url}/api/users`;
 
+    updateUsers(user: Users): Observable<any> {
+        return (this.http.put(`${this.users_api}`, user));
+    }
     createUsers(user: Users): Observable<any> {
         console.log(user);
         return (this.http.post(`${this.users_api}`, user));

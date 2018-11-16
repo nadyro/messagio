@@ -8,6 +8,7 @@
   "dependencies": {
     "@types/socket.io-client": "^1.4.32",
     "bluebird": "^3.5.2",
+    "client-sessions": "^0.8.0",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
