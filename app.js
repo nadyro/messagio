@@ -7,6 +7,7 @@ var io = require('socket.io').listen(http);
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('client-sessions');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -16,16 +17,9 @@ var mongoose = require("mongoose");
 var counter = 0;
 
 mongoose.Promise = bluebird;
-mongoose.connect("mongodb://localhost/messagio", { useNewUrlParser: true }).then(() => { console.log('Successfully connected to Database Messagio.') }).catch(() => { console.log('Unable to connect to database Messagio.') });
-/*
-app.use(function (request, response, next) {
-  response.setHeader("Access-Control-Allow-Origin", "*");
-  response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  response.setHeader('Access-Control-Allow-Credentials', true);
-  next();
-});
-*/
+mongoose.connect("mongodb://localhost/messagio", { useNewUrlParser: true })
+.then(() => { console.log('Successfully connected to Database Messagio.') })
+.catch(() => { console.log('Unable to connect to database Messagio.') });
 app.use(cors());
 
 // view engine setup
@@ -37,16 +31,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(session({
+  cookieName: 'mySession',
+  secret: 'random_sentence',
+  duration: 120 * 60 * 1000,
+  activeDuration: 30 * 60 * 1000
+}));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api', api);
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
-
 // error handler
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
@@ -57,6 +54,7 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 var connections = [];
 var i;
 io.set('transports', ['websocket']);

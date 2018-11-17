@@ -14,7 +14,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MessagioSocketService } from './services/messagiosocket.service';
 import { MessagioService } from './services/messagio.service';
 import { UsersService } from './services/users.service';
-import {SigninService} from './services/signin.service';
+import { SigninService } from './services/signin.service';
 
 const Routes: Routes = [
   { path: '', component: MessagioComponent },

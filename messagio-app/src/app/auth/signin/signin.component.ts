@@ -14,9 +14,10 @@ export class SigninComponent implements OnInit {
   ngOnInit() {
   }
   check_user(){
+    console.log("check_user")
     console.log(this.checkUser);
     this.SigninService.getUserByEmail(this.checkUser).subscribe(res => {
-      console.log(res);
+      console.log(res['data']);
     })
   }
 
