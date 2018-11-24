@@ -1,4 +1,4 @@
-<div class="container poz">
+<div class="container poz" *ngIf="user_session && user_interlocutor">
     <div class="row">
       <div class="col-3 container container_profile">
         <div class="profile col-12">
@@ -7,10 +7,10 @@
           </div>
           <div class="infos_profile">
             <h3>
-              {{usersList[0].first_name}} {{usersList[0].last_name}}
+              {{user_session['first_name']}} {{user_session['last_name']}}
             </h3>
             <p>
-                {{usersList[0].bio}}
+                {{user_session['bio']}}
             </p>
           </div>
         </div>
@@ -73,10 +73,10 @@
           </div>
           <div class="infos_profile">
             <h3>
-              {{usersList[1].first_name}} {{usersList[1].last_name}}
+              {{user_interlocutor.first_name}} {{user_interlocutor.last_name}}
             </h3>
             <p>
-                {{usersList[1].bio}}
+                {{user_interlocutor.bio}}
             </p>
           </div>
         </div>

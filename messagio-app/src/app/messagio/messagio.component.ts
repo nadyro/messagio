@@ -22,28 +22,36 @@ export class MessagioComponent implements OnInit, OnDestroy {
   messagiosList: Messagio[];
   counter: number = 0;
   usersList: Users[];
+  user_session = JSON.parse(sessionStorage.getItem('user_session'));
+  user_interlocutor = JSON.parse(sessionStorage.getItem('user_interlocutor'));
 
   sendMessage() {
-    console.log("Send Message");
     this.newMessagio.date = this.messagioService.parsingDate();
+    this.newMessagio.emitter = this.user_session.first_name + " " + this.user_session.last_name;
+    this.newMessagio.receiver = this.user_interlocutor.first_name + " " + this.user_interlocutor.last_name;
+    this.newMessagio.id_emitter = this.user_session._id;
+    this.newMessagio.id_receiver = this.user_interlocutor._id;
     this.chatServices.sendMessage(this.newMessagio);
   }
 
   ngOnInit(): void {
+    if (this.user_session)
+      this.newMessagio.id_emitter = this.user_session._id;
+    if (this.user_interlocutor)
+      this.newMessagio.id_receiver = this.user_interlocutor._id;
     this.usersService.getUsers().subscribe(users => {
       this.usersList = users;
     })
-    this.messagioService.getMessagios()
-      .subscribe(messagios => {
-        this.messagiosList = messagios;
-        if (this.messagiosList.length == 5)
-          this.counter = this.messagiosList[4].position;
-        console.log(this.messagiosList);
-      })
+    if (this.user_session && this.user_interlocutor) {
+      this.messagioService.getConversation(this.newMessagio)
+        .subscribe(messagios => {
+          this.messagiosList = messagios;
+          if (this.messagiosList.length == 5)
+            this.counter = this.messagiosList[4].position;
+        })
+    }
 
     this.Connection = this.chatServices.getMessage().subscribe(res => {
-      console.log("Connection")
-      console.log(this.messagiosList);
       if (this.messagiosList.length == 5)
         this.messagiosList.splice(0, 1);
       this.messagiosList.push(res['object']);
@@ -54,9 +62,12 @@ export class MessagioComponent implements OnInit, OnDestroy {
   create() {
     this.counter++;
     this.newMessagio.position = this.counter;
+    this.newMessagio.emitter = this.user_session.first_name + " " + this.user_session.last_name;
+    this.newMessagio.receiver = this.user_interlocutor.first_name + " " + this.user_interlocutor.last_name;
+    this.newMessagio.id_emitter = this.user_session._id;
+    this.newMessagio.id_receiver = this.user_interlocutor._id;
     this.messagioService.createMessagio(this.newMessagio).subscribe((res) => {
-      console.log("Create");
-      console.log(res);
+      return res;
     });
   }
 

@@ -10,7 +10,6 @@ exports.getUsers = async function (query, page, limit) {
         return users;
     }
     catch (e) {
-        console.log(e);
         throw Error(e);
     }
 }
@@ -19,7 +18,6 @@ exports.updateUsers = async function (users) {
     var id = users.id;
     try {
         var user_to_update = await Users.findById(id);
-        console.log(user_to_update);
     }
     catch (e) {
         throw Error(e);
@@ -35,7 +33,6 @@ exports.updateUsers = async function (users) {
         user_to_update.d_o_b = users.d_o_b;
         user_to_update.bio = users.bio;
     }
-    console.log(user_to_update);
     try {
         var savedUser = await user_to_update.save();
         return (savedUser);
@@ -59,7 +56,6 @@ exports.createUsers = async function (users) {
         return savedUsers;
     }
     catch (e) {
-        console.log(e);
         throw Error(e);
     }
 }

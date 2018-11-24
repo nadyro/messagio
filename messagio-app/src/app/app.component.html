@@ -1,17 +1,17 @@
 <header class="row">
   <div class="container">
     <div class="row">
-      <div class="container header_elem col-2">
-        <h4 (click)="check_session()"><a routerLink="/dashboard">Dashboard</a></h4>
+      <div class="container header_elem col-2" *ngIf="user_session">
+        <h4><a routerLink="/">Dashboard</a></h4>
       </div>
-      <div class="container header_elem col-2">
-        <h4><a routerLink="/signup">Sign Up</a></h4>
+      <div class="container header_elem col-2" *ngIf="!user_session">
+        <h4><a href="/signup">Sign Up</a></h4>
       </div>
-      <div class="container header_elem col-2">
-          <h4><a routerLink="/signin">Sign In</a></h4>
+      <div class="container header_elem col-2" *ngIf="!user_session">
+          <h4><a href="/">Sign In</a></h4>
         </div>
-      <div class="container header_elem col-8">
-        <h4 class="title_messagio"><a routerLink="/">
+      <div class="container header_elem col-8" *ngIf="user_session">
+        <h4 class="title_messagio"><a routerLink="/messagio">
             Messagio
           </a>
         </h4>

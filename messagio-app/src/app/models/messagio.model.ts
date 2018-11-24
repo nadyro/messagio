@@ -8,6 +8,8 @@ class Messagio {
     status: string;
     emitter: string;
     receiver: string;
+    id_emitter: string;
+    id_receiver: string;
 
     constructor(
     ){
@@ -19,6 +21,8 @@ class Messagio {
         this.status = ""
         this.emitter = "";
         this.receiver = "";
+        this.id_emitter = "";
+        this.id_receiver = "";
 }
 }
 

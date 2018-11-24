@@ -13,12 +13,11 @@ export class SigninComponent implements OnInit {
   public checkUser = new Users();
   ngOnInit() {
   }
-  check_user(){
-    console.log("check_user")
-    console.log(this.checkUser);
+  check_user() {
     this.SigninService.getUserByEmail(this.checkUser).subscribe(res => {
-      console.log(res['data']);
-    })
+      sessionStorage.setItem('user_session', JSON.stringify(res['session'].user_session));
+    });
+    //window.location.href = "/";
   }
 
 }

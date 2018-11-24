@@ -5,16 +5,18 @@
         Chat
       </h4>
       <div class="db_user row" *ngFor="let user of users">
-          <div class="db_user_infos online_dot"></div>
-          <div class="db_user_infos db_user_pp">
-            <img class="db_user_img" src="../../assets/img/pp_blackcoffee.jpg" alt="{{user.first_name}} {{user.last_name}} profile picture">
-          </div>
-          <p class="db_user_infos db_users_name">
+        <div class="db_user_infos online_dot"></div>
+        <div class="db_user_infos db_user_pp">
+          <img class="db_user_img" src="../../assets/img/pp_blackcoffee.jpg" alt="{{user.first_name}} {{user.last_name}} profile picture">
+        </div>
+        <p class="db_user_infos db_users_name">
+          <a (click)="talkto(user)" routerLink="/messagio">
             {{user.first_name}} {{user.last_name}}
-          </p>
-          <p class="db_user_infos db_users_bio">
-          </p>
-          <i class="fas fa-file-alt" (mouseenter)="hover($event)" (mouseleave)="unhover($event)"></i>
+          </a>
+        </p>
+        <p class="db_user_infos db_users_bio">
+        </p>
+        <i class="fas fa-file-alt" (mouseenter)="hover($event)" (mouseleave)="unhover($event)"></i>
       </div>
     </div>
 
@@ -30,11 +32,11 @@
           <img class="db_profile_img" src="../../assets/img/pp_blackcoffee.jpg" alt="profile picture">
         </div>
         <div class="db_profile_perso">
-          <p class="db_profile_infos db_profile_name">
-            {{users[0].first_name}} {{users[0].last_name}}
+          <p class="db_profile_infos db_profile_name" *ngIf="user_session">
+            {{user_session['first_name']}} {{user_session['last_name']}}
           </p>
-          <p class="db_profile_infos db_profile_email">
-            {{users[0].email}}
+          <p class="db_profile_infos db_profile_email" *ngIf="user_session">
+            {{user_session['email']}}
           </p>
         </div>
       </div>
@@ -46,19 +48,16 @@
       <h4>
         Edit profile
       </h4>
-      <div class="db_edit_profile_infos">
+      <div class="db_edit_profile_infos" *ngIf="user_session">
         <form class="form-group">
           <textarea #edit_profile_bio name="edit_profile_bio" (keydown.enter)="update_element(edit_profile_bio)" class="edit_profile_bio form-control edit_profile_elem"
-            id="edit_profile_bio" value="{{users[0].bio}}"></textarea>
+            id="edit_profile_bio" value="{{user_session['bio']}}"></textarea>
           <input #edit_profile_first_name type="text" name="edit_profile_first_name" (keyup.enter)="update_element(edit_profile_first_name)"
-            class="edit_profile_first_name form-control edit_profile_elem" id="edit_profile_first_name" value="{{users[0].first_name}}">
+            class="edit_profile_first_name form-control edit_profile_elem" id="edit_profile_first_name" value="{{user_session['first_name']}}">
           <input #edit_profile_last_name type="text" name="edit_profile_last_name" (keyup.enter)="update_element(edit_profile_last_name)"
-            class="edit_profile_last_name form-control edit_profile_elem" id="edit_profile_last_name" value="{{users[0].last_name}}">
+            class="edit_profile_last_name form-control edit_profile_elem" id="edit_profile_last_name" value="{{user_session['last_name']}}">
           <input #edit_profile_email type="text" name="edit_profile_email" (keyup.enter)="update_element(edit_profile_email)"
-            class="edit_profile_email form-control edit_profile_elem" id="edit_profile_email" value="{{users[0].email}}">
-            <input #edit_profile_password type="text" name="edit_profile_password" (keyup.enter)="update_element(edit_profile_password)"
-            class="edit_profile_password form-control edit_profile_elem" id="edit_profile_password" value="{{users[0].password}}">
-            
+            class="edit_profile_email form-control edit_profile_elem" id="edit_profile_email" value="{{user_session['email']}}">
         </form>
       </div>
     </div>

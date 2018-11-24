@@ -10,19 +10,8 @@ export class AppComponent implements OnInit {
   constructor(
     private signinService: SigninService
   ) { }
-  session = {};
-  check_session(){
-    console.log("check session")
-    this.session = this.signinService.getSession(null).subscribe(res => {
-      console.log("Check Session : ");
-      console.log(res);
-    });
-  }
+  user_session = JSON.parse(sessionStorage.getItem('user_session'));
+  
   ngOnInit() {
-    console.log("app component")
-    this.session = this.signinService.getSession(null).subscribe(res => {
-      console.log("Session : ");
-      console.log(res);
-    });
   }
 }

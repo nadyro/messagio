@@ -9,7 +9,7 @@ export class SigninService {
     constructor (private http: HttpClient) {
 
     }
-    api_url = "http://localhost:3000";
+    api_url = 'http://localhost:3000';
     signin_url = `${this.api_url}/api/signin`;
 
     getUserByEmail(user: any):Observable<Users[]>{
@@ -17,14 +17,12 @@ export class SigninService {
             if (res['exists'] == true)
                 return (res as Users[]);
             else
-                return null;
+                return (res['exists']);
         })))
     }
 
     getSession(user: any):Observable<any>{
-        console.log("test");
         return (this.http.put(`${this.signin_url}`, user).pipe(map(res => {
-            console.log(res);
             return res;
         })))
     }

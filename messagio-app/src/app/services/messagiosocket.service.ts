@@ -16,9 +16,8 @@ export class MessagioSocketService {
     }
     getMessage() {
         let observable = new Observable(observer => {
-            this.socket = io(environment.ws_url, {transports: ['websocket']});
+            this.socket = io(environment.ws_url, { transports: ['websocket'] });
             this.socket.on('messagio', (data) => {
-                console.log("Received message from Websocket Server")
                 observer.next(data);
             })
             return () => {

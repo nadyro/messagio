@@ -34,7 +34,6 @@ export class MessagioService {
   }
 
   createMessagio(messagio: Messagio): Observable<any> {
-    console.log("Service");
     return this.http.post(`${this.messagioUrl}`, messagio);
   }
 
@@ -49,9 +48,16 @@ export class MessagioService {
         return mess;
       }))
   }
-  editMessagio(messagio: Messagio) {
-    let editUrl = `${this.messagioUrl}`
-    return this.http.put(editUrl, messagio);
+  getConversation(messagio: Messagio): Observable<Messagio[]> {
+    var mess;
+    let editUrl = `${this.messagioUrl}`;
+    return this.http.put(editUrl, messagio).pipe(map(res => {
+      mess = res['data'] as Messagio[];
+      mess.forEach(element => {
+        element.date = this.parsingDate(element.date);
+      })
+      return mess;
+    }));
   }
 
   deleteMessagio(id: string): any {

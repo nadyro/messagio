@@ -10,9 +10,9 @@ exports.getUserByEmail = async function (request, response) {
         var exists = false;
         if (user_to_check.password === user.password) {
             exists = true;
+            user_to_check['password'] = undefined;
             request.mySession.user_session = user_to_check;
         }
-        console.log(request.mySession);
         return (response.status(200).json({
             status: 200,
             data: user_to_check,
@@ -26,7 +26,7 @@ exports.getUserByEmail = async function (request, response) {
     }
 }
 
-exports.getSession = async function(request, response) {
+exports.getSession = async function (request, response) {
     if (request.mySession)
         return (request.mySession);
     else
