@@ -8,7 +8,9 @@ var MessagioSchema = new mongoose.Schema({
     position: Number,
     status: String,
     emitter: String,
-    receiver: String
+    receiver: String,
+    id_emitter: String,
+    id_receiver: String
 });
 
 MessagioSchema.plugin(mongoosePaginate)

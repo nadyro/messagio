@@ -59,10 +59,8 @@ var connections = [];
 var i;
 io.set('transports', ['websocket']);
 io.on('connection', (socket) => {
-  console.log("User connected");
   connections.push(socket);
   socket.on('disconnect', function () {
-    console.log("user disconnected");
     i = connections.indexOf(socket);
     connections.splice(i, 1);
   });

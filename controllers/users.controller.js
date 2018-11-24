@@ -1,6 +1,6 @@
 var UsersService = require('../services/users.service');
 
-exports.getUsers = async function (request, response, next){
+exports.getUsers = async function (request, response, next) {
     var page;
     var limit;
 
@@ -20,16 +20,14 @@ exports.getUsers = async function (request, response, next){
             message: "Successfully fetched Users"
         }))
     }
-    catch (e){
-        console.log(e);
+    catch (e) {
         throw Error(e);
     }
 }
-exports.updateUsers = async function (request, response, next){
-    console.log(request.body);
+exports.updateUsers = async function (request, response, next) {
     var id = request.body._id;
 
-    if (!id){
+    if (!id) {
         return response.status(400).json({ status: 400, message: "No id referenced" });
     }
     var user_to_update = {
@@ -49,12 +47,12 @@ exports.updateUsers = async function (request, response, next){
             message: "Successfully updated user."
         }))
     }
-    catch(e){
+    catch (e) {
         throw Error(e);
     }
 
 }
-exports.createUsers = async function (request, response, next){
+exports.createUsers = async function (request, response, next) {
     var user = {
         last_name: request.body.last_name,
         first_name: request.body.first_name,
@@ -65,14 +63,13 @@ exports.createUsers = async function (request, response, next){
     }
     try {
         var createdUser = await UsersService.createUsers(user);
-        console.log("User creation");
         return (response.status(201).json({
             status: 201,
             data: createdUser,
             message: "Successfully created user"
         }));
     }
-    catch (e){
+    catch (e) {
         return response.status(400).json({ status: 400, message: e.message });
     }
 }

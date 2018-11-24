@@ -15,7 +15,6 @@ export class MessagioChatService {
     }
 
     sendMessagios(msg) {
-        console.log(msg);
         return (this.messagios.next(msg));
     }
 }*/

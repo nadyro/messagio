@@ -16,12 +16,23 @@ import { MessagioService } from './services/messagio.service';
 import { UsersService } from './services/users.service';
 import { SigninService } from './services/signin.service';
 
-const Routes: Routes = [
-  { path: '', component: MessagioComponent },
-  { path: 'signup', component: SignupComponent },
-  { path: 'signin', component: SigninComponent },
-  { path: 'dashboard', component: DashboardComponent }
-]
+console.log(sessionStorage);
+const Routes: Routes = [];
+if (sessionStorage.length === 0)
+{
+  Routes.push({path: '', component: SigninComponent });
+  Routes.push({ path: 'signup', component: SignupComponent });
+  Routes.push({ path: 'messagio', component: MessagioComponent });
+  Routes.push({ path: 'dashboard', component: DashboardComponent });
+}
+else{
+  Routes.push({path: '', component: DashboardComponent });
+  Routes.push({ path: 'signup', component: SignupComponent });
+  Routes.push({ path: 'signin', component: SigninComponent });
+  Routes.push({ path: 'messagio', component: MessagioComponent });
+}
+
+
 
 @NgModule({
   declarations: [

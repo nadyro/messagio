@@ -18,14 +18,12 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
     this.UserService.getUsers().subscribe(res => {
-      console.log(res);
       this.userList = res;
     })
   }
 
   createUser(){
     this.UserService.createUsers(this.newUser).subscribe(res => {
-      console.log(res);
       this.userList.push(res);
       this.newUser = new Users();
     });

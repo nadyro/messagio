@@ -10,12 +10,8 @@ export class AppComponent implements OnInit {
   constructor(
     private signinService: SigninService
   ) { }
-  session = {};
+  user_session = JSON.parse(sessionStorage.getItem('user_session'));
+  
   ngOnInit() {
-    console.log("app component")
-    this.session = this.signinService.getSession().subscribe(res => {
-      console.log("Session : ");
-      console.log(res);
-    });
   }
 }

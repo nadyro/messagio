@@ -13,25 +13,26 @@ export class DashboardComponent implements OnInit {
   ) { }
   users = [];
   bio_hovered = "";
+  user_session = JSON.parse(sessionStorage.getItem('user_session'));
   ngOnInit() {
     this.usersService.getUsers().subscribe((res) => {
-      console.log(res);
       this.users = res;
     });
   }
+  talkto(user){
+    sessionStorage.setItem('user_interlocutor', JSON.stringify(user));
+  }
   update_element(e) {
     if (e.name === "edit_profile_first_name")
-      this.users[0].first_name = e.value;
+      this.user_session['first_name'] = e.value;
     if (e.name === "edit_profile_last_name")
-      this.users[0].last_name = e.value;
+      this.user_session['last_name'] = e.value;
     if (e.name === "edit_profile_email")
-      this.users[0].email = e.value;
+      this.user_session['email'] = e.value;
     if (e.name === "edit_profile_bio")
-      this.users[0].bio = e.value;
-    if (e.name === "edit_profile_password")
-      this.users[0].password = e.value;
+      this.user_session['bio']= e.value;
     this.usersService.updateUsers(this.users[0]).subscribe((res) => {
-      console.log(res);
+      return res;
     });
   }
   hover(e) {

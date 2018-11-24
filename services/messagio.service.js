@@ -17,10 +17,25 @@ exports.getMessagio = async function (query, page, limit) {
         throw Error('Error while paginating Messagios');
     }
 }
+exports.getConversation = async function (messagio) {
+    var id_emitter;
+    var id_receiver;
 
+    id_emitter = messagio.id_emitter;
+    id_receiver = messagio.id_receiver;
+    try{
+        var conversation = await Messagio.find({id_emitter: id_emitter}, {id_receiver: id_receiver});
+        return conversation;
+    }
+    catch(e)
+    {
+        throw Error(e);
+    }
+}
 exports.createMessagio = async function (messagio) {
     save_date = new Date();
     date_to_long = save_date.getTime();
+
     var newMessagio = new Messagio({
         title: messagio.title,
         content: messagio.content,
@@ -29,16 +44,16 @@ exports.createMessagio = async function (messagio) {
         position: messagio.position,
         status: messagio.status,
         emitter: messagio.emitter,
-        receiver: messagio.receiver
+        receiver: messagio.receiver,
+        id_emitter: messagio.id_emitter,
+        id_receiver: messagio.id_receiver
     })
 
     try {
-        console.log("Saving messagio");
         var savedMessagio = await newMessagio.save();
         return savedMessagio;
     }
     catch (e){
-        console.log("Errors!!!");
         throw Error(e);
     }
 }
@@ -56,7 +71,6 @@ exports.updateMessagio = async function(messagio){
     if (!oldMessagio)
         return (false);
 
-        console.log(oldMessagio);
         oldMessagio.title = messagio.title;
         oldMessagio.content = messagio.content;
         oldMessagio.date = format_date(new Date());
@@ -64,7 +78,6 @@ exports.updateMessagio = async function(messagio){
         oldMessagio.status = messagio.status;
         oldMessagio.emitter = messagio.emitter;
         oldMessagio.receiver = messagio.receiver;
-        console.log(oldMessagio);
         
         try {
             var savedMessagio = await oldMessagio.save();

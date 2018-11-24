@@ -17,12 +17,10 @@ export class UsersService {
         return (this.http.put(`${this.users_api}`, user));
     }
     createUsers(user: Users): Observable<any> {
-        console.log(user);
         return (this.http.post(`${this.users_api}`, user));
     }
-    getUsers(): Observable<Users[]>{
+    getUsers(): Observable<Users[]> {
         return (this.http.get(this.users_api).pipe(map(res => {
-            console.log(res);
             return res['data'].docs as Users[];
         })));
     }
