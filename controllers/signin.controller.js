@@ -6,7 +6,9 @@ exports.getUserByEmail = async function (request, response) {
         password: request.body.password
     }
     try {
+        console.log(request.body);
         var user_to_check = await signinService.checkUser(user);
+        console.log(user_to_check);
         var exists = false;
         if (user_to_check.password === user.password) {
             exists = true;
@@ -27,8 +29,9 @@ exports.getUserByEmail = async function (request, response) {
 }
 
 exports.getSession = async function(request, response) {
-    if (request.mySession)
+    return request;
+    /*if (request.mySession)
         return (request.mySession);
     else
-        return (null);
+        return (null);*/
 }

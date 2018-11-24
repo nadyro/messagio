@@ -6,7 +6,7 @@
                 placeholder="Email">
             <input type="password" name="password_si" class="password_si form-control" id="password_si" [(ngModel)]="checkUser.password"
             placeholder="Password"> 
-            <button type="submit" class="btn btn-primary btn-chat_send form-control" (click)="check_user()">Send</button>
+            <button type="submit" class="btn btn-primary btn-chat_send form-control" (click)="check_user()" (click)="check_session()">Send</button>
         </div>
         <div class="col-3"></div>
     </div>

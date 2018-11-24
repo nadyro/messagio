@@ -13,6 +13,7 @@ export class SigninService {
     signin_url = `${this.api_url}/api/signin`;
 
     getUserByEmail(user: any):Observable<Users[]>{
+        console.log("user emaqil");
         return (this.http.put(`${this.signin_url}`, user).pipe(map(res => {
             if (res['exists'] == true)
                 return (res as Users[]);
@@ -21,9 +22,9 @@ export class SigninService {
         })))
     }
 
-    getSession(user: any):Observable<any>{
+    getSession():Observable<any>{
         console.log("test");
-        return (this.http.put(`${this.signin_url}`, user).pipe(map(res => {
+        return (this.http.get(this.signin_url).pipe(map(res => {
             console.log(res);
             return res;
         })))

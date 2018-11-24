@@ -13,6 +13,14 @@ export class SigninComponent implements OnInit {
   public checkUser = new Users();
   ngOnInit() {
   }
+session;
+  check_session(){
+    console.log("check session")
+    this.session = this.SigninService.getSession().subscribe(res => {
+      console.log("Check Session : ");
+      console.log(res);
+    });
+  }
   check_user(){
     console.log("check_user")
     console.log(this.checkUser);
