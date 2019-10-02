@@ -18,19 +18,19 @@ import { SigninService } from './services/signin.service';
 
 console.log(sessionStorage);
 const Routes: Routes = [];
-if (sessionStorage.length === 0)
+/*if (sessionStorage.length === 0)
 {
   Routes.push({path: '', component: SigninComponent });
   Routes.push({ path: 'signup', component: SignupComponent });
   Routes.push({ path: 'messagio', component: MessagioComponent });
   Routes.push({ path: 'dashboard', component: DashboardComponent });
 }
-else{
+else{*/
   Routes.push({path: '', component: DashboardComponent });
   Routes.push({ path: 'signup', component: SignupComponent });
   Routes.push({ path: 'signin', component: SigninComponent });
   Routes.push({ path: 'messagio', component: MessagioComponent });
-}
+//}
 
 
 

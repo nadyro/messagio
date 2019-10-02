@@ -7,6 +7,7 @@ exports.getUserByEmail = async function (request, response) {
     }
     try {
         console.log(request.body);
+        console.log("Signin controller");
         var user_to_check = await signinService.checkUser(user);
         console.log(user_to_check);
         var exists = false;
